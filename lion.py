@@ -1,13 +1,13 @@
 import docx
 import pandas as pd
 from collections import Counter
-
+k=0
 doc=docx.Document('lion.docx')
 fullText = []
 for para in doc.paragraphs:
     fullText.append(para.text)
 
-fullText=' '.join(fullText)
+fullText=' '.join(fullText).lower()
 
 words = fullText.split (' ') 
 
@@ -18,9 +18,11 @@ for i in words:
         war[i]+=1
     else:
         war[i]=1
-    
+    k+=1
 
 
 df=pd.DataFrame(list(war.items()), columns=['Слово', 'Частота встречи, раз'])
 
 print(df)
+
+print(k)
