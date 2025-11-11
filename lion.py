@@ -14,14 +14,31 @@ fullText = re.findall('[a-zа-яё]+', fullText, flags=re.IGNORECASE)
 
 war={}
 
+
+
 for i in range(len(fullText)):
     if fullText[i] in war:
         war[fullText[i]]+=1
     else:
-        war[fullText[i]]=1
+        war[fullText[i]]=1 
 
-df=pd.DataFrame(list(war.items()), columns=['Слово', 'Частота встречи, раз'])
+#print(war)
 
-print(df)
+ks=[]
+tms=[]
+prs=[]
 
-print(k)
+for key in war.keys():
+    ks.append(key)
+    tms.append(war[key])
+    prs.append(int(war[key])/len(war)*100)
+
+data = {
+'Слово' : ks,
+'Частота встречи, раз' : tms,
+'Частота встречи в %' : prs
+}
+
+print(pd.DataFrame(data))
+
+
