@@ -19,4 +19,8 @@ for i in words:
     else:
         war[i]=1
     
-print(war)
+
+
+df=pd.DataFrame(list(war.items()), columns=['Слово', 'Частота встречи, раз'])
+
+print(df)
