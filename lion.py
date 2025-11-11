@@ -1,3 +1,4 @@
+import tabulate
 import re
 import docx
 import pandas as pd
@@ -10,19 +11,17 @@ for para in doc.paragraphs:
     fullText.append(para.text)
  
 fullText=' '.join(fullText).lower()
-fullText = re.findall('[a-zа-яё]+', fullText, flags=re.IGNORECASE)
+Text = re.findall('[a-zа-яё]+', fullText, flags=re.IGNORECASE)
 
 war={}
 
 
 
-for i in range(len(fullText)):
-    if fullText[i] in war:
-        war[fullText[i]]+=1
+for i in range(len(Text)):
+    if Text[i] in war:
+        war[Text[i]]+=1
     else:
-        war[fullText[i]]=1 
-
-#print(war)
+        war[Text[i]]=1 
 
 ks=[]
 tms=[]
@@ -39,6 +38,9 @@ data = {
 'Частота встречи в %' : prs
 }
 
-print(pd.DataFrame(data))
+print(tabulate.tabulate(data, headers='data.keys', tablefmt='fancy_grid'))
 
-
+'''letters=''.join(e for e in fullText if e.isalnum())
+print(letters)
+letters=list(letters)
+print(letters)'''
