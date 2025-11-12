@@ -48,10 +48,11 @@ letters=''.join(e for e in fullText if e.isalnum())
 stat={}
 
 for i in letters:
-    if i not in war:
+    if i not in stat:
         stat[i]=1
-    elif i in war:
+    elif i in stat:
         stat[i]+=1 
 
-#plt.hist(stat.keys, color = 'blue', edgecolor = 'black',
-        # bin=int(180/5))
+plt.bar(range(len(stat)), list(stat.values()), align='center')
+plt.xticks(range(len(stat)), list(stat.keys()))
+plt.show()
