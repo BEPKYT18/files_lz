@@ -19,8 +19,14 @@ with open('titanic.csv', 'r') as file:
                 result[row[2]][row[1]]=1
             elif row[1] in result[row[2]]:
                 result[row[2]][row[1]]+=1
-        t+=1
-        
+
+
+df=pd.DataFrame(result)
+
+
+
+print(df)
+
 tclass=list(result.keys())
 
 live={}
@@ -28,16 +34,23 @@ die={}
 stat=[]
 
 for i in range(len(result)):
-    live[tclass[i]]=result[tclass[i]]['1']/t*100
-    die[tclass[i]]=result[tclass[i]]['0']/t*100
-    
+    live[tclass[i]]=result[tclass[i]]['1']/(result[tclass[i]]['1']+result[tclass[i]]['0'])*100
+    die[tclass[i]]=result[tclass[i]]['0']/(result[tclass[i]]['1']+result[tclass[i]]['0'])*100
 
-   
+print(live)
+
+#df_hist=plt.hist(cumulative=True,bins=100,density=1,histtype="step")
+
+
+
+'''plt.hist([live.values(), die.values()], color=['g','r'], alpha=0.8, bins=50)
+plt.show()'''
+
 
 plt.bar(range(len(live)), list(live.values()),color='blue', align='center')
 plt.xticks(range(len(live)), list(live.keys()))
 plt.show()
-plt.bar(range(len(live)), list(live.values()),color='orange', align='center')
-plt.xticks(range(len(live)), list(live.keys()))
+plt.bar(range(len(die)), list(die.values()),color='orange', align='center')
+plt.xticks(range(len(die)), list(die.keys()))
 plt.show()
 
